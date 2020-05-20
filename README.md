@@ -35,19 +35,13 @@ Building From Source
 
 To build the project yourself, you must acquire your own copies of the necessary libraries:
 
- - The Canon EDSDK is available from Canon in your region. Place the Framework and Header folders from the SDK in the EDSDK folder alongside this file.
-
- - libjpeg-turbo is available from http://libjpeg-turbo.virtualgl.org. Install using the libjpeg-turbo installer, and then perform the following operations to make a copy suitable for embedding (note the thinning stage is necessary for codesigning to succeed):
+- install from brew the following libraries:
 
 ````
-    cd <project dir>
-    cp /opt/libjpeg-turbo/lib/libturbojpeg.0.dylib libturbojpeg.0.dylib
-    # id to location in app bundle
-    install_name_tool -id @executable_path/../Frameworks/libturbojpeg.0.dylib libturbojpeg.0.dylib
-    # link against system libgcc_s
-    install_name_tool -change /opt/local/lib/libgcc/libgcc_s.1.dylib /usr/lib/libgcc_s.1.dylib
-    # discard architectures for other platforms
-    lipo -thin x86_64 libturbojpeg.0.dylib -o libturbojpeg.0.dylib
+    brew install libjpeg-turbo
+    brew install libgphoto2
 ````
+
+On build the the libraries and headers will be places in the appropriate location
 
  - Syphon is available from http://syphon.v002.info. Place Syphon.framework in the Syphon folder alongside this file.
