@@ -129,6 +129,8 @@
             }
         }];
     }];
+    [_window setReleasedWhenClosed:NO];
+    [_window makeMainWindow];
 }
 
 - (BOOL)doesVersionCheck
@@ -158,6 +160,16 @@
         return NSTerminateLater;
     }
     return NSTerminateNow;
+}
+
+-(BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)hasVisible
+{
+    if (hasVisible == NO)
+    {
+        [_window setIsVisible:YES];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
